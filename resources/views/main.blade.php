@@ -29,7 +29,7 @@
         }
 
         .page-content {
-            padding-top: 150px;
+            padding-top: 50px;
             padding-bottom: 100px;
         }
     </style>
@@ -64,7 +64,7 @@
                                 </td>
                                 <td>{{ $item->title }}</td>
                                 <td>{{ ucfirst($item->categories) }}</td>
-                                <td class="text-truncate">{{ Str::limit($item->description, 50, '...') }}</td>
+                                <td class="text-truncate">{!! Str::limit($item->description, 50, '...') !!}</td>
                                 <td class="text-truncate">
                                     {{ \Carbon\Carbon::parse($item->date)->translatedFormat('d F Y') }}</td>
                                 <td>

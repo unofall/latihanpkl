@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('title');
             $table->enum('categories',['travel','topic','fashion']);
             $table->text('description');
-            $table->string('location');
+            $table->string('location')->nullable();
             $table->timestamps();
         });
     }

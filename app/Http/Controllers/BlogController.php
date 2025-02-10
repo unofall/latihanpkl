@@ -6,6 +6,7 @@ use App\Models\Blog;
 use App\Models\Fashion;
 use App\Models\Topic;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
 
@@ -15,20 +16,19 @@ class BlogController extends Controller
     {
         $blogs = Blog::where('categories', 'travel')->get();
         $topic = Blog::where('categories', 'topic')->get();
-        $fashions = Blog::where('categories','fashion')->get();
-        return view('index', compact('blogs','topic', 'fashions'));
+        $fashions = Blog::where('categories', 'fashion')->get();
+        return view('index', compact('blogs', 'topic', 'fashions'));
     }
 
-    function show()
+    function profil()
     {
-        $data['blog'] = Blog::all();
-        return view('travel', $data);
+        $user = Auth::user();
+        return view('profie', compact('user'));
     }
 
     function create()
     {
         $data['blog'] = Blog::all();
-
         return view('create', $data);
     }
 
@@ -39,7 +39,7 @@ class BlogController extends Controller
             'title' => 'required|string',
             'description' => 'required|string',
             'categories' => 'required',
-            'location' => 'required|string',
+            'location' => 'required_if:categories,!fashion',
         ]);
 
         $filename = '';

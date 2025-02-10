@@ -23,31 +23,36 @@ use Illuminate\Support\Facades\Route;
 //     return view('index');
 // });
 Route::get('/', [LoginController::class, 'login']);
+Route::get('/register', [LoginController::class, 'register']);
+Route::post('/authregister', [LoginController::class, 'addregister']);
 Route::post('/auth', [LoginController::class, 'auth']);
 
-    Route::middleware(['login:Admin'])->group(function () {
+Route::middleware(['login:Admin'])->group(function () {
     Route::get('/admin', [AdminController::class, 'show']);
-    Route::get('/travel', [BlogController::class, 'show']);
     Route::get('/create', [BlogController::class, 'create']);
     Route::post('/add', [BlogController::class, 'add']);
     Route::get('/update/{id}', [BlogController::class, 'edit']);
     Route::post('/update/{id}', [BlogController::class, 'update']);
     Route::get('/delete/{id}', [BlogController::class, 'delete']);
 
-    Route::get('/topic', [TopicController::class, 'show']);
-    Route::get('/create_topic', [TopicController::class, 'create']);
-    Route::post('/create_topic', [TopicController::class, 'add']);
-    Route::get('/update_topic/{id}', [TopicController::class, 'edit']);
-    Route::post('/update_topic/{id}', [TopicController::class, 'update']);
-    Route::get('/delete_topic/{id}', [TopicController::class, 'delete']);
+    // Route::get('/topic', [TopicController::class, 'show']);
+    // Route::get('/create_topic', [TopicController::class, 'create']);
+    // Route::post('/create_topic', [TopicController::class, 'add']);
+    // Route::get('/update_topic/{id}', [TopicController::class, 'edit']);
+    // Route::post('/update_topic/{id}', [TopicController::class, 'update']);
+    // Route::get('/delete_topic/{id}', [TopicController::class, 'delete']);
 
-    Route::get('/fashion', [FashionController::class, 'show']);
-    Route::get('/create_fashion', [FashionController::class, 'create']);
-    Route::post('/create_fashion', [FashionController::class, 'add']);
-    Route::get('/update_fashion/{id}', [FashionController::class, 'edit']);
-    Route::post('/update_fashion/{id}', [FashionController::class, 'update']);
-    Route::get('/delete_fashion/{id}', [FashionController::class, 'delete']);
+    // Route::get('/fashion', [FashionController::class, 'show']);
+    // Route::get('/create_fashion', [FashionController::class, 'create']);
+    // Route::post('/create_fashion', [FashionController::class, 'add']);
+    // Route::get('/update_fashion/{id}', [FashionController::class, 'edit']);
+    // Route::post('/update_fashion/{id}', [FashionController::class, 'update']);
+    // Route::get('/delete_fashion/{id}', [FashionController::class, 'delete']);
 });
+
+Route::middleware(['login:User'])->group(function () {
     Route::get('/show', [BlogController::class, 'index']);
     Route::get('/detail/{id}', [BlogController::class, 'detail']);
-    Route::get('/logout', [LoginController::class, 'logout']);
+});
+Route::get('/profile',[BlogController::class,'profil']);
+Route::get('/logout', [LoginController::class, 'logout']);  

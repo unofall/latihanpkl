@@ -21,7 +21,7 @@
     </style>
 
     <!-- start banner Area -->
-    <section class="banner-area relative" id="home" data-parallax="scroll"
+    <section class="banner-area relative " id="home" data-parallax="scroll"
         data-image-src={{ asset('assets/img/Raja_Ampat,_Mutiara_Indah_di_Timur_Indonesia.jpg') }}>
         <div class="overlay-bg overlay"></div>
         <div class="container">
@@ -112,7 +112,7 @@
                 </div>
             </div>
             <div class="row">
-                @if ($blogs->isEmpty())
+                @if ($topic->isEmpty())
                     <div class="col-12 d-flex justify-content-center align-items-center mt-5" data-aos="fade-up" data-aos-delay="600" style="height: 200px;">
                         <p class="text-muted fs-4 font-weight-bold">Belum ada Blog yang diposting</p>
                     </div>
@@ -187,7 +187,7 @@
                 </div>
             </div>
             <div class="row justify-content-center">
-                @if ($blogs->isEmpty())
+                @if ($fashions->isEmpty())
                 <div class="col-12 d-flex justify-content-center align-items-center mt-5" data-aos="fade-up" data-aos-delay="600" style="height: 200px;">
                     <p class="text-muted fs-4 font-weight-bold">Belum ada Blog yang diposting</p>
                 </div>
