@@ -193,6 +193,7 @@
                 </div>
             @else
                 @foreach ($fashions as $key => $item)
+                <a href="/detail/{{$item->id}}">
                     <div class="col-lg-3 col-md-6 mb-4" data-aos="fade-up" data-aos-delay="{{ 600 + $key * 150 }}">
                         <div class="card border-0 shadow-sm rounded-lg h-100">
                             <img class="card-img-top rounded-top"
@@ -218,6 +219,7 @@
                             </div>
                         </div>
                     </div>
+                </a>
                 @endforeach
                 @endif 
             </div>

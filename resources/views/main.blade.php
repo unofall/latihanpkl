@@ -50,7 +50,8 @@
                             <th>Title</th>
                             <th>Categories</th>
                             <th>Description</th>
-                            <th>Date</th>
+                            <th>Location</th>
+                            {{-- <th>Date</th> --}}
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -59,14 +60,19 @@
                             <tr>
                                 <td>{{ $key + 1 }}</td>
                                 <td>
-                                    <img src="{{ asset('storage/foto/' . $item->foto) }}" class="rounded" width="100"
+                                    <img src="{{ asset('storage/foto/' . $item->foto) }}" class="rounded" width="100" height="100" style="object-fit: cover; object-position: top"
                                         alt="Blog Image">
                                 </td>
                                 <td>{{ $item->title }}</td>
                                 <td>{{ ucfirst($item->categories) }}</td>
                                 <td class="text-truncate">{!! Str::limit($item->description, 50, '...') !!}</td>
-                                <td class="text-truncate">
-                                    {{ \Carbon\Carbon::parse($item->date)->translatedFormat('d F Y') }}</td>
+                                <td>
+                                    {{ $item->location ?? 'No location' }}
+                                </td>
+                                
+                                {{-- <td class="text-truncate">
+                                    {{ \Carbon\Carbon::parse($item->date)->translatedFormat('d F Y') }}
+                                </td> --}}
                                 <td>
                                     <div class="btn-group">
                                         <a href="/update/{{ $item->id }}" class="btn btn-info btn-sm">Update</a>
