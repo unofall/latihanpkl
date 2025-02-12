@@ -2,7 +2,9 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\BlogController;
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\FashionController;
+use App\Http\Controllers\LikeController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\TopicController;
 use App\Models\Fashion;
@@ -53,6 +55,9 @@ Route::middleware(['login:Admin'])->group(function () {
 Route::middleware(['login:User'])->group(function () {
     Route::get('/show', [BlogController::class, 'index']);
     Route::get('/detail/{id}', [BlogController::class, 'detail']);
+    Route::get('/comment/{id}',[CommentController::class, 'comment']);
+    Route::post('/addcomment/{id}', [CommentController::class, 'addcomment']);
+    Route::post('/like', [LikeController::class, 'like']);
 });
 Route::get('/profile',[BlogController::class,'profil']);
 Route::get('/logout', [LoginController::class, 'logout']);  

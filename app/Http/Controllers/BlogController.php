@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Blog;
+use App\Models\Comment;
 use App\Models\Fashion;
 use App\Models\Topic;
 use Illuminate\Http\Request;
@@ -14,10 +15,14 @@ class BlogController extends Controller
 {
     function index()
     {
-        $blogs = Blog::where('categories', 'travel')->get();
-        $topic = Blog::where('categories', 'topic')->get();
-        $fashions = Blog::where('categories', 'fashion')->get();
-        return view('index', compact('blogs', 'topic', 'fashions'));
+        $blog = Blog::paginate(3);
+        $blogs = Blog::where('categories', 'travel')->paginate(3);
+        $topic = Blog::where('categories', 'topic')->paginate(3);
+        $fashions = Blog::where('categories', 'fashion')->paginate(3);
+        // $total_comments = Comment::count();
+        $commentsCount = Comment::count();
+        $formatComments = $commentsCount == 0 ? '0' : sprintf("%02d", $commentsCount);
+        return view('index', compact('blogs', 'topic', 'fashions','blog','formatComments'));
     }
 
     function profil()
@@ -106,6 +111,7 @@ class BlogController extends Controller
     function detail(Request $request)
     {
         $data['blog'] = Blog::find($request->id);
+        $data['comment'] = Comment::all();
         return view('detail', $data);
     }
 }

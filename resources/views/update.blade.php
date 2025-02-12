@@ -57,17 +57,15 @@
                             </div>
                         </div>
 
-                        <div class="d-flex">
+                        <div class="d-flex" id="formContainer">
                             <div class="mb-3 col-md-6" id="locationFormGroup">
                                 <label for="location" class="form-label">Location</label>
                                 <textarea name="location" id="location" cols="30" rows="3" class="form-control">{{ $blog->location }}</textarea>
                             </div>
-                            <div class="mb-3 col-md-6">
+                            <div class="mb-3 col-md-6" id="descriptionFormGroup">
                                 <label for="description" class="form-label">Description</label>
-
                                 <textarea name="description" id="description" cols="30" rows="10" class="form-control">{{ $blog->description }}</textarea>
                             </div>
-
                         </div>
 
                         <div class="d-flex justify-content-end">
@@ -89,8 +87,10 @@
                 var selectedCategory = $(this).val();
                 if (selectedCategory === 'fashion') {
                     $('#locationFormGroup').hide();
+                    $('#descriptionFormGroup').removeClass('col-md-6').addClass('col-md-12');
                 } else {
                     $('#locationFormGroup').show();
+                    $('#descriptionFormGroup').removeClass('col-md-12').addClass('col-md-6');
                 }
             });
         </script>

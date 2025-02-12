@@ -14,4 +14,13 @@ class Blog extends Model
     protected $keyType = 'string'; // UUID adalah string
 
     protected $guarded = [];
+
+    function comments(){
+        return $this->hasMany(Comment::class, 'user_id');
+    }
+
+    function user(){
+        return $this->hasMany(User::class, 'id');
+    }
+
 }

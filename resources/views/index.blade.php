@@ -65,9 +65,9 @@
                     </div>
                 </div>
             </div>
-
+    
             <!-- Blog Wisata -->
-            <div class="row text-center" data-aos="fade-up" data-aos-delay="600">
+            <div class="row text-center col-12" data-aos="fade-up" data-aos-delay="600">
                 @if ($blogs->isEmpty())
                     <div class="col-12 d-flex justify-content-center align-items-center" style="height: 200px;">
                         <p class="text-muted fs-4 font-weight-bold">Belum ada Blog yang diposting</p>
@@ -80,12 +80,12 @@
                                     <img class="card-img-top rounded"
                                         style="height: 180px; object-fit: cover; object-position: top"
                                         src="{{ asset('storage/foto/' . $item->foto) }}" alt="">
-
+    
                                     <div class="card-body">
-                                        <h5 class="card-title"><a href="#" class="text-dark">{{ $item->title }}</a>
-                                        </h5>
-                                        <p class="text-muted small mb-2" style="font-size: 13px"><i
-                                                class="fas fa-map-marker-alt mr-1"></i>{{ $item->location }}</p>
+                                        <h5 class="card-title"><a href="#" class="text-dark">{{ $item->title }}</a></h5>
+                                        <p class="text-muted small mb-2" style="font-size: 13px">
+                                            <i class="fas fa-map-marker-alt mr-1"></i>{{ $item->location }}
+                                        </p>
                                     </div>
                                 </a>
                             </div>
@@ -93,8 +93,14 @@
                     @endforeach
                 @endif
             </div>
+    
+            <!-- Tautan Pagination -->
+            <div class="row justify-content-center">
+                {{ $blog->links('pagination::bootstrap-4') }}
+            </div>
         </div>
     </section>
+    
 
     <!-- End category Area -->
 
@@ -210,12 +216,12 @@
                                     <a href="#" class="text-dark font-weight-bold">{{ $item->title }}</a>
                                 </h5>
 
-                                <p class="text-muted small">{{ Str::limit($item->desc, 100) }}</p>
+                                <p class="text-muted small">{!! Str::limit($item->description, 70) !!}</p>
                             </div>
 
                             <div class="card-footer bg-white border-0 d-flex justify-content-between text-muted small">
                                 <p class="mb-0"><i class="fas fa-heart text-danger"></i> 15 Likes</p>
-                                <p class="mb-0"><i class="fas fa-comment text-primary"></i> 02 Comments</p>
+                                    <p class="mb-0"><i class="fas fa-comment text-primary"></i>{{$formatComments}} Comment</p>
                             </div>
                         </div>
                     </div>
