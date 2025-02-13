@@ -22,7 +22,7 @@ class BlogController extends Controller
         // $total_comments = Comment::count();
         $commentsCount = Comment::count();
         $formatComments = $commentsCount == 0 ? '0' : sprintf("%02d", $commentsCount);
-        return view('index', compact('blogs', 'topic', 'fashions','blog','formatComments'));
+        return view('blog.show', compact('blogs', 'topic', 'fashions','blog','formatComments'));
     }
 
     function profil()
