@@ -26,7 +26,7 @@ class CommentController extends Controller
         $comment->desc_comment = $request->desc_comment;
         $comment->save();
 
-        return redirect('/detail/'.$request->id);
+        return redirect('/detail/'.$request->id)->with('success', 'Komentar berhasil ditambahkan.');
         // return redirect()->back()->with('success', 'Komentar berhasil ditambahkan.');
     }
 

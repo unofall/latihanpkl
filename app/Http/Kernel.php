@@ -66,4 +66,9 @@ class Kernel extends HttpKernel
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         
     ];
+
+    protected $routeMiddleware = [
+        // ...
+        'update.blog.view.count' => \App\Http\Middleware\UpdateBlogViewCount::class,
+    ];
 }

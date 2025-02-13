@@ -110,8 +110,33 @@ class BlogController extends Controller
 
     function detail(Request $request)
     {
+        
         $data['blog'] = Blog::find($request->id);
         $data['comment'] = Comment::all();
         return view('detail', $data);
+    }
+
+    public function like($id)
+    {
+        $blog = Blog::findOrFail($id);
+        $liked = false;
+
+        // Periksa apakah pengguna telah menyukai blog ini
+        if (Auth::check()) {
+            if ($blog->likes->contains(Auth::user()->id)) {
+                // Jika sudah like, hapus like
+                $blog->likes()->detach(Auth::user()->id);
+                $blog->decrement('likes_count');
+            } else {
+                // Jika belum like, tambahkan like
+                $blog->likes()->attach(Auth::user()->id);
+                $blog->increment('likes_count');
+                $liked = true;
+            }
+        }
+
+        return response()->json(['likes_count' => $blog->likes_count, 'liked' => $liked]);
+
+        // return redirect()->back();
     }
 }

@@ -3,6 +3,7 @@
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     {{-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"> --}}
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <!-- FontAwesome CDN -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
@@ -49,6 +50,12 @@
     </section>
     <!-- End banner Area -->
 
+    <section class="category-popular">
+        <div class="container">
+            
+        </div>
+    </section>
+
 
     <!-- Start category Area -->
     <section class="category-area section-gap" id="news">
@@ -65,7 +72,7 @@
                     </div>
                 </div>
             </div>
-    
+
             <!-- Blog Wisata -->
             <div class="row text-center col-12" data-aos="fade-up" data-aos-delay="600">
                 @if ($blogs->isEmpty())
@@ -80,11 +87,15 @@
                                     <img class="card-img-top rounded"
                                         style="height: 180px; object-fit: cover; object-position: top"
                                         src="{{ asset('storage/foto/' . $item->foto) }}" alt="">
-    
+
                                     <div class="card-body">
-                                        <h5 class="card-title"><a href="#" class="text-dark">{{ $item->title }}</a></h5>
+                                        <h5 class="card-title"><a href="#" class="text-dark">{{ $item->title }}</a>
+                                        </h5>
                                         <p class="text-muted small mb-2" style="font-size: 13px">
                                             <i class="fas fa-map-marker-alt mr-1"></i>{{ $item->location }}
+                                        </p>
+                                        <p class="text-muted small mb-2" style="font-size: 13px">
+                                            <i class="fas fa-eye mr-1"></i>{{ $item->view_count }} views
                                         </p>
                                     </div>
                                 </a>
@@ -93,14 +104,14 @@
                     @endforeach
                 @endif
             </div>
-    
+
             <!-- Tautan Pagination -->
             <div class="row justify-content-center">
                 {{ $blog->links('pagination::bootstrap-4') }}
             </div>
         </div>
     </section>
-    
+
 
     <!-- End category Area -->
 
@@ -119,7 +130,8 @@
             </div>
             <div class="row">
                 @if ($topic->isEmpty())
-                    <div class="col-12 d-flex justify-content-center align-items-center mt-5" data-aos="fade-up" data-aos-delay="600" style="height: 200px;">
+                    <div class="col-12 d-flex justify-content-center align-items-center mt-5" data-aos="fade-up"
+                        data-aos-delay="600" style="height: 200px;">
                         <p class="text-muted fs-4 font-weight-bold">Belum ada Blog yang diposting</p>
                     </div>
                 @else
@@ -194,40 +206,62 @@
             </div>
             <div class="row justify-content-center">
                 @if ($fashions->isEmpty())
-                <div class="col-12 d-flex justify-content-center align-items-center mt-5" data-aos="fade-up" data-aos-delay="600" style="height: 200px;">
-                    <p class="text-muted fs-4 font-weight-bold">Belum ada Blog yang diposting</p>
-                </div>
-            @else
-                @foreach ($fashions as $key => $item)
-                <a href="/detail/{{$item->id}}">
-                    <div class="col-lg-3 col-md-6 mb-4" data-aos="fade-up" data-aos-delay="{{ 600 + $key * 150 }}">
-                        <div class="card border-0 shadow-sm rounded-lg h-100">
-                            <img class="card-img-top rounded-top"
-                                style="height: 250px; object-fit: cover; im width: 100%;"
-                                src="{{ asset('storage/foto/' . $item->foto) }}" alt="Fashion Image">
-
-                            <div class="card-body text-center">
-                                <p class="text-muted small mb-1">
-                                    <i class="fas fa-calendar-alt"></i>
-                                    {{ \Carbon\Carbon::parse($item->date)->translatedFormat('d F Y') }}
-                                </p>
-
-                                <h5 class="card-title">
-                                    <a href="#" class="text-dark font-weight-bold">{{ $item->title }}</a>
-                                </h5>
-
-                                <p class="text-muted small">{!! Str::limit($item->description, 70) !!}</p>
-                            </div>
-
-                            <div class="card-footer bg-white border-0 d-flex justify-content-between text-muted small">
-                                <p class="mb-0"><i class="fas fa-heart text-danger"></i> 15 Likes</p>
-                                    <p class="mb-0"><i class="fas fa-comment text-primary"></i>{{$formatComments}} Comment</p>
-                            </div>
-                        </div>
+                    <div class="col-12 d-flex justify-content-center align-items-center mt-5" data-aos="fade-up"
+                        data-aos-delay="600" style="height: 200px;">
+                        <p class="text-muted fs-4 font-weight-bold">Belum ada Blog yang diposting</p>
                     </div>
-                </a>
-                @endforeach
-                @endif 
+                @else
+                    @foreach ($fashions as $key => $item)
+                        <a href="/detail/{{ $item->id }}">
+                            <div class="col-lg-3 col-md-6 mb-4" data-aos="fade-up"
+                                data-aos-delay="{{ 600 + $key * 150 }}">
+                                <div class="card border-0 shadow-sm rounded-lg h-100">
+                                    <img class="card-img-top rounded-top"
+                                        style="height: 250px; object-fit: cover; width: 100%;"
+                                        src="{{ asset('storage/foto/' . $item->foto) }}" alt="Fashion Image">
+
+
+                                    <div class="card-body text-center">
+                                        <h5 class="card-title">
+                                            <a href="#" class="text-dark font-weight-bold">{{ $item->title }}</a>
+                                        </h5>
+                                        <p class="text-muted small">{!! Str::limit($item->description, 70) !!}</p>
+                                    </div>
+
+                                    <div
+                                        class="card-footer bg-white border-0 d-flex justify-content-between text-muted small">
+                                        <div class="position-absolute top-0 right-0 m-2">
+                                            <a href="javascript:void(0);" class="like-btn text-danger"
+                                                data-id="{{ $item->id }}"
+                                                style="background: transparent; text-decoration: none;">
+                                                @if (Auth::check() && $item->likes->contains(Auth::user()->id))
+                                                    <i class="fas fa-heart text-danger"></i> <span
+                                                        class="likes-count">{{ $item->likes_count }} Like </span>
+                                                @else
+                                                    <i class="fas fa-heart text-danger"></i><span
+                                                        class="likes-count">{{ $item->likes_count }} Like</span>
+                                                @endif
+                                            </a>
+                                        </div>
+                                        <p class="mb-0 d-flex align-items-center">
+                                            <i class="fas fa-comment text-primary mr-1"></i> {{ $formatComments }}
+                                            Comments
+                                        </p>
+                                        <p class="mb-0 d-flex align-items-center">
+                                            <i class="fas fa-eye mr-1"></i> {{ $item->view_count }} Views
+                                        </p>
+                                    </div>
+
+                                    <div class="d-flex justify-content-end">
+                                        <p class="text-muted small mb-1">
+                                            {{ \Carbon\Carbon::parse($item->date)->translatedFormat('d F Y') }}
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    @endforeach
+                @endif
             </div>
 
         </div>
@@ -312,6 +346,61 @@
             </div>
         </div>
     </footer>
+
+    <script>
+        function shareToSocialMedia(blogId) {
+            const url = `https://example.com/detail/${blogId}`;
+            const text = `Check out this amazing blog post!`;
+            if (navigator.share) {
+                navigator.share({
+                    title: 'Bagikan Blog',
+                    text: text,
+                    url: url
+                }).then(() => {
+                    console.log('Blog post shared successfully');
+                }).catch((error) => {
+                    console.error('Error sharing blog post:', error);
+                });
+            } else {
+                alert('Browser Anda tidak mendukung fitur berbagi.');
+            }
+        }
+    </script>
+
+    <script>
+        $(document).ready(function() {
+            $('.like-btn').click(function() {
+                var blogId = $(this).data('id');
+                var likeBtn = $(this);
+
+                $.ajax({
+                    url: '/like/' + blogId,
+                    type: 'POST',
+                    data: {
+                        _token: '{{ csrf_token() }}'
+                    },
+                    success: function(response) {
+                        var likesCount = likeBtn.find('.likes-count');
+                        likesCount.text(response.likes_count);
+
+                        if (response.liked) {
+                            likeBtn.html(
+                                '<i class="fas fa-heart text-danger"></i> <span class="likes-count">' +
+                                response.likes_count + '</span> Like ');
+                        } else {
+                            likeBtn.html(
+                                '<i class="far fa-heart text-danger"></i> <span class="likes-count">' +
+                                response.likes_count + '</span> Like');
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        console.error('Error:', error);
+                    }
+                });
+            });
+        });
+    </script>
+
 
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>

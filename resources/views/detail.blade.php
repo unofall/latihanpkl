@@ -73,6 +73,11 @@
 
     <body>
         <div class="container page">
+            @if(session('success'))
+                <div class="alert alert-success">
+                    {{ session('success') }}
+                </div>
+            @endif
             @if ($blog->categories == 'fashion')
                 <div class="row">
                     <div class="col-md-4">

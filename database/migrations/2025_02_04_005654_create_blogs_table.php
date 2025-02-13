@@ -18,6 +18,8 @@ return new class extends Migration
             $table->enum('categories',['travel','topic','fashion']);
             $table->text('description');
             $table->string('location')->nullable();
+            $table->integer('likes_count')->default(0);
+            $table->integer('view_count')->default(0);
             $table->timestamps();
         });
     }

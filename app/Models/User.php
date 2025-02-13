@@ -19,6 +19,11 @@ class User extends Authenticatable
      */
     protected $guarded = [];
 
+    public function likedBlogs()
+    {
+        return $this->belongsToMany(Blog::class, 'blog_user_likes')->withTimestamps();
+    }
+
     /**
      * The attributes that should be hidden for serialization.
      *

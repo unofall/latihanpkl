@@ -23,4 +23,9 @@ class Blog extends Model
         return $this->hasMany(User::class, 'id');
     }
 
+    public function likes()
+    {
+        return $this->belongsToMany(User::class, 'blog_user_likes')->withTimestamps();
+    }
+
 }

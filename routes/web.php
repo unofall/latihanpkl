@@ -54,10 +54,10 @@ Route::middleware(['login:Admin'])->group(function () {
 
 Route::middleware(['login:User'])->group(function () {
     Route::get('/show', [BlogController::class, 'index']);
-    Route::get('/detail/{id}', [BlogController::class, 'detail']);
-    Route::get('/comment/{id}',[CommentController::class, 'comment']);
+    Route::get('/detail/{id}', [BlogController::class, 'detail'])->middleware('update.blog.view.count');
+    Route::get('/comment/{id}', [CommentController::class, 'comment']);
     Route::post('/addcomment/{id}', [CommentController::class, 'addcomment']);
-    Route::post('/like', [LikeController::class, 'like']);
+    Route::post('/like/{id}', [BlogController::class, 'like'])->name('blog.like');
 });
-Route::get('/profile',[BlogController::class,'profil']);
-Route::get('/logout', [LoginController::class, 'logout']);  
+Route::get('/profile', [BlogController::class, 'profil']);
+Route::get('/logout', [LoginController::class, 'logout']);
