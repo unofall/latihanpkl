@@ -85,7 +85,7 @@
 
             $('#categories').change(function() {
                 var selectedCategory = $(this).val();
-                if (selectedCategory === 'fashion') {
+                if (selectedCategory === 'fashion' || selectedCategory === 'topic') {
                     $('#locationFormGroup').hide();
                     $('#descriptionFormGroup').removeClass('col-md-6').addClass('col-md-12');
                 } else {

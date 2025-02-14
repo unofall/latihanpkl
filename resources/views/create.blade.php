@@ -96,7 +96,7 @@
 
             $('#categories').change(function() {
                 var selectedCategory = $(this).val();
-                if (selectedCategory === 'fashion') {
+                if (selectedCategory === 'fashion' || selectedCategory === 'topic') {
                     $('#locationFormGroup').hide();
                 } else {
                     $('#locationFormGroup').show();

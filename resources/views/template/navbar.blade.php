@@ -1,89 +1,121 @@
 <!DOCTYPE html>
-<html lang="zxx" class="no-js">
-
+<html lang="en">
 <head>
-    <!-- Mobile Specific Meta -->
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <!-- Favicon-->
-    <link rel="shortcut icon" href="img/fav.png">
-    <!-- Author Meta -->
-    <meta name="author" content="colorlib">
-    <!-- Meta Description -->
-    <meta name="description" content="">
-    <!-- Meta Keyword -->
-    <meta name="keywords" content="">
-    <!-- meta character set -->
     <meta charset="UTF-8">
-    <!-- Site Title -->
-    <title>Blogger</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,400,300,500,600,700" rel="stylesheet">
-    <!--
-        CSS
-        ============================================= -->
-    <link rel="stylesheet" href={{ asset('templates/css/linearicons.css') }}>
-    <link rel="stylesheet" href={{ asset('templates/css/font-awesome.min.css') }}>
-    <link rel="stylesheet" href={{ asset('templates/css/bootstrap.css') }}>
-    <link rel="stylesheet" href={{ asset('templates/css/owl.carousel.css') }}>
-    <link rel="stylesheet" href={{ asset('templates/css/main.css') }}>
+    {{-- <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital@0;1&display=swap" rel="stylesheet"> --}}
+
+    <!-- Core Style -->
+    <link rel="stylesheet" href={{ asset('assets/style.css') }}>
+
+    <!-- Font Icons -->
+    <link rel="stylesheet" href={{ asset('assets/css/font-icons.css') }}>
+
+    <!-- Plugins/Components CSS -->
+    <link rel="stylesheet" href={{ asset('assets/css/swiper.css') }}>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href={{ asset('assets/css/custom.css') }}>
+    <title>Document</title>
 </head>
-
 <body>
+    <header id="header" class="full-header">
+        <div id="header-wrap">
+            <div class="container">
+                <div class="header-row">
 
-    <!-- Start Header Area -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class="container">
-            <a class="navbar-brand" href="/">
-                <img src="{{ asset('templates/img/logo.png') }}" alt="Logo" height="30">
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-                aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+                    <!-- Logo
+  ============================================= -->
+                    <div id="logo">
+                        <a href="index.html">
+                            <img class="logo-default" src={{ asset('assets/images/logo@2x.png') }}
+                                alt="Canvas Logo">
+                            <img class="logo-dark" src={{ asset('assets/images/logo-dark@2x.png') }}
+                                alt="Canvas Logo">
+                        </a>
+                    </div><!-- #logo end -->
 
-            <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
-                <ul class="navbar-nav">
+                    <div class="header-misc">
 
-                    <li class="nav-item me-3">
-                        @if (Auth::user()->role === 'Admin')
-                            <a class="nav-link" href="/admin">Home</a>
-                    </li>
-                @else
-                    <a class="nav-link" href="/show">Home</a></li>
-                    @endif
-                    <li class="nav-item me-3"><a class="nav-link" href="#news">News</a></li>
-                    <li class="nav-item me-3"><a class="nav-link" href="#travel">Travel</a></li>
-                    <li class="nav-item me-3"><a class="nav-link" href="#fashion">Fashion</a></li>
-                    <li class="nav-item me-3"><a class="nav-link" href="#team">Team</a></li>
-                </ul>
-                <ul>
-                    <ul class="navbar-nav">
-                        <li class="nav-item dropdown">
-                            <a class="nav-link" href="" id="profileDropdown" role="button"
-                                data-bs-toggle="dropdown" aria-expanded="false">
-                                <img src="{{ asset('assets/img/Meme.jpg') }}" alt="User"
-                                    class="rounded-circle col-md-7" height="25" width="50">
-                                <span class="ms-2"
-                                    style="font-size: 12px; font-weight: 400">{{ Auth::user()->role }}</span>
-                            </a>
-                            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="profileDropdown">
-                                <li><a class="dropdown-item" href="/profile">My Profile</a></li>
-                                <li><a class="dropdown-item" href="/settings">Settings</a></li>
-                                <li><a class="dropdown-item" href="/logout">Logout</a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                </ul>
+                        <!-- Top Search
+   ============================================= -->
+                        <div id="top-search" class="header-misc-icon">
+                            <a href="#" id="top-search-trigger"><i class="uil uil-search"></i><i
+                                    class="bi-x-lg"></i></a>
+                        </div><!-- #top-search end -->
+
+                    </div>
+
+                    <div class="primary-menu-trigger">
+                        <button class="cnvs-hamburger" type="button" title="Open Mobile Menu">
+                            <span class="cnvs-hamburger-box"><span class="cnvs-hamburger-inner"></span></span>
+                        </button>
+                    </div>
+
+                    <!-- Primary Navigation
+  ============================================= -->
+                    <nav class="primary-menu">
+
+                        <ul class="menu-container one-page-menu" data-easing="easeInOutExpo" data-speed="1500">
+                            <li class="menu-item"><a class="menu-link" href="#" data-href="#home">
+                                    <div>Home</div>
+                                </a></li>
+                            <li class="menu-item"><a class="menu-link" href="#"
+                                    data-href="#section-about">
+                                    <div>About</div>
+                                </a></li>
+                            <li class="menu-item"><a class="menu-link" href="#" data-href="#section-work">
+                                    <div>Work</div>
+                                </a></li>
+                            <li class="menu-item"><a class="menu-link" href="#" data-href="#section-team">
+                                    <div>Team</div>
+                                </a></li>
+                            <li class="menu-item"><a class="menu-link" href="#"
+                                    data-href="#section-services">
+                                    <div>Services</div>
+                                </a></li>
+                            <li class="menu-item"><a class="menu-link" href="#"
+                                    data-href="#section-pricing">
+                                    <div>Pricing</div>
+                                </a></li>
+                            <li class="menu-item"><a class="menu-link" href="blog.html">
+                                    <div>Blog</div>
+                                </a></li>
+                            <li class="menu-item"><a class="menu-link" href="#"
+                                    data-href="#section-testimonials" data-offset="60">
+                                    <div>Testimonials</div>
+                                </a></li>
+                            <li class="menu-item"><a class="menu-link" href="/logout" {{-- data-href="#section-contact" --}}>
+                                    <div>Contact</div>
+                                </a></li>
+                        </ul>
+
+                    </nav><!-- #primary-menu end -->
+
+                    <form class="top-search-form" action="search.html" method="get">
+                        <input type="text" name="q" class="form-control" value=""
+                            placeholder="Type &amp; Hit Enter.." autocomplete="off">
+                    </form>
+
+                </div>
             </div>
         </div>
-    </nav>
-    <!-- End Header Area -->
+        <div class="header-wrap-clone"></div>
+    </header><!-- #header end -->
 
-
-
-    <div class="container-fluid pb-5">
+    <div class="container pb-5">
         @yield('content')
     </div>
 
+    
+    <!-- JavaScripts
+ ============================================= -->
+ <script src={{ asset('assets/js/plugins.min.js') }}></script>
+ <script src={{ asset('assets/js/functions.bundle.js') }}></script>
 </body>
+</html>
